@@ -5,13 +5,19 @@
 <div class="row">
   <div class="col-md-12">
     <form>
-      <input
-        ng-model="filtro"
-        ng-model-options="{ debounce: 500 }"
-        type="search"
-        class="form-control"
-        placeholder="filtrar"
-      />
+      <div class="input-group">
+        <span class="input-group-btn">
+          <a href="fotos/new" class="btn btn-primary">Nova foto</a>
+        </span>
+
+        <input
+          ng-model="filtro"
+          ng-model-options="{ debounce: 500 }"
+          type="search"
+          class="form-control"
+          placeholder="filtrar"
+        />
+      </div>
     </form>
   </div>
 </div>
@@ -22,10 +28,6 @@
     ng-repeat="foto in fotos | filter: { titulo: filtro }"
     titulo="{{foto.titulo}}"
   >
-    <img
-      class="img-responsive center-block"
-      src="{{foto.url}}"
-      alt="{{foto.titulo}}"
-    />
+    <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
   </meu-painel>
 </div>
