@@ -6,6 +6,7 @@
 
 <form novalidate ng-submit="submeter()" name="formulario" class="row">
   <div class="col-md-6">
+    <!-- Titulo -->
     <div class="form-group">
       <label>Título</label>
       <input
@@ -39,10 +40,30 @@
         URL obrigatória
       </span>
     </div>
+    <!-- Descricao -->
     <div class="form-group">
       <label>Descrição</label>
       <textarea ng-model="foto.descricao" name="descricao" class="form-control">
       </textarea>
+    </div>
+    <!-- Grupo -->
+    <div class="form-group">
+      <label>Grupo</label>
+      <select
+        name="grupo"
+        class="form-control"
+        ng-controller="GruposController"
+        ng-model="foto.grupo"
+        ng-options="grupo._id as (grupo.nome | uppercase) for grupo in grupos"
+      >
+        <option value="">Selecione Grupo</option>
+      </select>
+      <span
+        ng-show="formulario.$submitted && formulario.grupo.$error.required"
+        class="form-control alert-danger"
+      >
+        Grupo obrigatório
+      </span>
     </div>
 
     <button
