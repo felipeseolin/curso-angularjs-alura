@@ -2,7 +2,7 @@ angular
   .module("minhasDiretivas", [])
   .directive("meuPainel", () => {
     var ddo = {
-      restric: "AE",
+      restrict: "AE",
       scope: {
         titulo: "@",
       },
@@ -44,5 +44,38 @@ angular
         '<button ng-click="acao()" class="btn btn-danger btn-block">{{nome}}</button>',
     };
 
+    return ddo;
+  })
+  .directive("meuFocus", function () {
+    var ddo = {
+      restrict: "A",
+      // scope: {
+      //   focado: "=",
+      // },
+      link: function (scope, element) {
+        // scope.$watch("focado", function () {
+        //   if (scope.focado) {
+        //     element[0].focus();
+        //     scope.focado = false;
+        //   }
+        // });
+        scope.$on("fotoCadastrada", function () {
+          element[0].focus();
+        });
+      },
+    };
+
+    return ddo;
+  })
+  .directive("meusTitulos", function () {
+    var ddo = {
+      restrict: "E",
+      template: '<ul><li ng-repeat="titulo in titulos">{{titulo}}</li></ul>',
+      controller: function ($scope, recursoFoto) {
+        recursoFoto.query((fotos) => {
+          $scope.titulos = fotos.map((foto) => foto.titulo);
+        });
+      },
+    };
     return ddo;
   });

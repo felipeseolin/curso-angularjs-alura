@@ -36,6 +36,7 @@ angular
         .then((dados) => {
           $scope.mensagem = dados.mensagem;
           if ($scope.inclusao) $scope.foto = {};
+          // $scope.focado = true;
         })
         .catch((dados) => {
           $scope.mensagem = dados.mensagem;

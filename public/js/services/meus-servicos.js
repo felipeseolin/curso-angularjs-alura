@@ -5,8 +5,9 @@ angular
       update: { method: "PUT" },
     });
   })
-  .factory("cadastroDeFotos", function (recursoFoto, $q) {
+  .factory("cadastroDeFotos", function (recursoFoto, $q, $rootScope) {
     var servico = {};
+    var evento = "fotoCadastrada";
 
     servico.cadastrar = function (foto) {
       return $q(function (resolve, reject) {
@@ -15,6 +16,7 @@ angular
             { fotoId: foto._id },
             foto,
             () => {
+              $rootScope.$broadcast(evento);
               resolve({
                 mensagem: `Foto ${foto.titulo} atualizada com sucesso!`,
                 inclusao: false,
@@ -31,6 +33,7 @@ angular
           recursoFoto.save(
             foto,
             () => {
+              $rootScope.$broadcast(evento);
               resolve({
                 mensagem: `Foto ${foto.titulo} incluida com sucesso`,
                 inclusao: true,
